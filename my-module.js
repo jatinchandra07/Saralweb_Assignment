@@ -9,17 +9,14 @@
 const mergeTimeRanges = (ranges, threshold) => {
   if (!Array.isArray(ranges) || ranges.length === 0) return [];
 
-  // Step 1: Sort ranges by start time
   const sorted = [...ranges].sort((a, b) => a[0] - b[0]);
 
   const merged = [];
   let [currentStart, currentEnd] = sorted[0];
 
-  // Step 2: Iterate through sorted ranges and merge
   for (let i = 1; i < sorted.length; i++) {
     const [nextStart, nextEnd] = sorted[i];
 
-    // If ranges overlap or gap <= threshold → merge them
     if (nextStart <= currentEnd + threshold) {
       currentEnd = Math.max(currentEnd, nextEnd);
     } else {
@@ -35,3 +32,4 @@ const mergeTimeRanges = (ranges, threshold) => {
 };
 
 module.exports = { mergeTimeRanges };
+
